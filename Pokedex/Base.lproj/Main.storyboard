@@ -161,6 +161,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ap0-Zr-bIK">
+                                <rect key="frame" x="16" y="125" width="343" height="534"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MoveCell" rowHeight="40" id="QLr-7o-uc3" customClass="MoveCell" customModule="Pokedex" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="343" height="40"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QLr-7o-uc3" id="WPr-yZ-Wy8">
+                                            <rect key="frame" x="0.0" y="0.0" width="343" height="39.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="Mtz-bm-fLO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="343" height="37"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="moveLbl" destination="Mtz-bm-fLO" id="kfs-vw-iWg"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rBf-IC-bDV">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                                 <subviews>
@@ -208,6 +234,9 @@
                                             <segment title="Moves"/>
                                         </segments>
                                         <color key="tintColor" red="1" green="0.34509803921568627" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <action selector="indexChanged:" destination="JLV-9Y-cyh" eventType="valueChanged" id="Nae-Q0-5OK"/>
+                                        </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qKI-dE-n6r">
                                         <rect key="frame" x="0.0" y="49" width="343" height="120"/>
@@ -371,6 +400,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ap0-Zr-bIK" firstAttribute="leading" secondItem="545-EV-hve" secondAttribute="leadingMargin" id="0UC-Zg-ZRx"/>
                             <constraint firstItem="lxC-7T-ht8" firstAttribute="top" secondItem="rBf-IC-bDV" secondAttribute="bottom" constant="20" id="1zo-oO-uuX"/>
                             <constraint firstItem="gdx-GQ-N3W" firstAttribute="top" secondItem="IPc-C8-AoD" secondAttribute="bottom" constant="8" id="2RH-2l-9JC"/>
                             <constraint firstItem="IPc-C8-AoD" firstAttribute="leading" secondItem="545-EV-hve" secondAttribute="leading" id="4WU-Ph-fj5"/>
@@ -380,10 +410,13 @@
                             <constraint firstItem="rBf-IC-bDV" firstAttribute="leading" secondItem="545-EV-hve" secondAttribute="leading" id="Mid-CA-qL4"/>
                             <constraint firstItem="lxC-7T-ht8" firstAttribute="leading" secondItem="545-EV-hve" secondAttribute="leadingMargin" id="Nsa-A6-LRR"/>
                             <constraint firstItem="IPc-C8-AoD" firstAttribute="top" secondItem="lxC-7T-ht8" secondAttribute="bottom" constant="20" id="X7m-e0-m0O"/>
+                            <constraint firstItem="ap0-Zr-bIK" firstAttribute="top" secondItem="rBf-IC-bDV" secondAttribute="bottom" constant="70" id="XoP-Vs-PlU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gdx-GQ-N3W" secondAttribute="trailing" id="gXR-rw-pq0"/>
                             <constraint firstItem="gdx-GQ-N3W" firstAttribute="leading" secondItem="545-EV-hve" secondAttribute="leadingMargin" id="gaB-3Y-Afh"/>
                             <constraint firstAttribute="trailing" secondItem="rBf-IC-bDV" secondAttribute="trailing" id="o1C-gJ-FOv"/>
+                            <constraint firstItem="ES4-Vb-SUv" firstAttribute="top" secondItem="ap0-Zr-bIK" secondAttribute="bottom" constant="8" id="q9q-qE-Zqi"/>
                             <constraint firstAttribute="trailingMargin" secondItem="lxC-7T-ht8" secondAttribute="trailing" id="uSu-fb-raE"/>
+                            <constraint firstItem="ap0-Zr-bIK" firstAttribute="trailing" secondItem="545-EV-hve" secondAttribute="trailingMargin" id="vrR-S0-U1v"/>
                         </constraints>
                     </view>
                     <connections>
@@ -391,12 +424,21 @@
                         <outlet property="currentEvoImg" destination="XWq-Cu-wQy" id="Atq-Vd-lnn"/>
                         <outlet property="defenseLbl" destination="L4R-Xs-XdB" id="5VE-9w-uB8"/>
                         <outlet property="descriptionLbl" destination="ROq-2K-ij4" id="iDo-ap-Db3"/>
+                        <outlet property="divider" destination="2Av-Xk-AVQ" id="rSl-F7-OuD"/>
                         <outlet property="evoLbl" destination="0KO-lQ-IGr" id="ia0-EW-UVn"/>
+                        <outlet property="evoView" destination="IPc-C8-AoD" id="ueP-Lu-S0i"/>
+                        <outlet property="fifthStack" destination="gdx-GQ-N3W" id="zaT-r6-jLd"/>
+                        <outlet property="firstStack" destination="qKI-dE-n6r" id="3kJ-W5-9dp"/>
+                        <outlet property="fourthStack" destination="A2M-FF-TKp" id="TI1-WK-6cK"/>
                         <outlet property="heightLbl" destination="iJg-Rz-htz" id="Fon-pS-ieA"/>
                         <outlet property="mainImg" destination="TE0-hS-b9l" id="gQR-dI-9XR"/>
                         <outlet property="nameLbl" destination="TIz-6s-SyO" id="ARA-86-5kl"/>
                         <outlet property="nextEvoImg" destination="t1l-OI-klD" id="fXO-Qf-Os1"/>
                         <outlet property="pokedexLbl" destination="4tp-UH-tzv" id="PKx-rF-CQD"/>
+                        <outlet property="secondStack" destination="73M-xX-JY6" id="Sh2-x4-gHj"/>
+                        <outlet property="segmentedControl" destination="Sd3-wi-k63" id="UJA-MT-5e1"/>
+                        <outlet property="tableView" destination="ap0-Zr-bIK" id="0wx-Iy-cNR"/>
+                        <outlet property="thirdStack" destination="vup-ke-KWA" id="yu3-1c-Zf6"/>
                         <outlet property="typeLbl" destination="KVV-K5-TNJ" id="eqo-SV-rD1"/>
                         <outlet property="weightLbl" destination="X1Y-rf-Shl" id="jia-m3-Lei"/>
                     </connections>

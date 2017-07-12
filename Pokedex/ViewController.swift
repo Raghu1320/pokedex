@@ -32,13 +32,24 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func initAudio() {
         
-        let path = Bundle.main.path(forResource: "music", ofType: "mp3")!
-        
         do {
-            musicPlayer = try AVAudioPlayer(contentsOf: NSURL(string: path)! as URL)
-            musicPlayer.prepareToPlay()
-            musicPlayer.numberOfLoops = -1
-            musicPlayer.play()
+            let date = Date()
+            let calendar = Calendar.current
+            let hour = calendar.component(.hour, from: date)
+            if hour >= 6 && hour <= 18 {
+                let path = Bundle.main.path(forResource: "Daytime", ofType: "mp3")!
+                musicPlayer = try AVAudioPlayer(contentsOf: NSURL(string: path)! as URL)
+                musicPlayer.prepareToPlay()
+                musicPlayer.numberOfLoops = -1
+                musicPlayer.play()
+            }
+            else {
+                let path = Bundle.main.path(forResource: "Nighttime", ofType: "mp3")!
+                musicPlayer = try AVAudioPlayer(contentsOf: NSURL(string: path)! as URL)
+                musicPlayer.prepareToPlay()
+                musicPlayer.numberOfLoops = -1
+                musicPlayer.play()
+            }
         } catch let err as NSError {
             print(err.debugDescription)
         }

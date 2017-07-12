@@ -22,6 +22,8 @@ class Pokemon {
     private var _nextEvolutionId: String!
     private var _nextEvolutionLvl: String!
     private var _pokemonUrl: String!
+    private var _moves: [String]!
+    private var _moveLearnTypes: [String]!
     
     var name: String {
         return _name
@@ -92,6 +94,20 @@ class Pokemon {
             _nextEvolutionLvl = ""
         }
         return _nextEvolutionLvl
+    }
+    
+    var moves: [String] {
+        if _moves == nil {
+            _moves = []
+        }
+        return _moves
+    }
+    
+    var moveLearnTypes: [String] {
+        if _moveLearnTypes == nil {
+            _moveLearnTypes = []
+        }
+        return _moveLearnTypes
     }
     
     init(name: String, pokedexId: Int) {
@@ -186,7 +202,7 @@ class Pokemon {
                                 if let lvl = evolutions[0]["level"] as? Int {
                                     self._nextEvolutionLvl = "\(lvl)"
                                 }
-
+                                
                             }
                             
                         }
@@ -195,20 +211,27 @@ class Pokemon {
                     
                 }
                 
+                if let moveArr = dict["moves"] as? [Dictionary<String, AnyObject>], moveArr.count > 0 {
+                    
+                    var moveList = [String]()
+                    var methodList = [String]()
+                    
+                    for x in (0..<moveArr.count) {
+                        
+                        if let move = moveArr[x]["name"] {
+                            moveList.append(move.capitalized!)
+                        }
+                        
+                        if let type = moveArr[x]["learn_type"] {
+                            methodList.append(type.capitalized!)
+                        }
+                        
+                    }
+                    self._moves = moveList
+                    self._moveLearnTypes = methodList
+                }
+
             }
-            
-            
-//            print("Request: \(String(describing: response.request))")   // original url request
-//            print("Response: \(String(describing: response.response))") // http url response
-//            print("Result: \(response.result)")                         // response serialization result
-//            
-//            if let json = response.result.value {
-//                print("JSON: \(json)") // serialized json response
-//            }
-//            
-//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
-//                print("Data: \(utf8Text)") // original server data as UTF8 string
-//            }
         }
     }
 }
